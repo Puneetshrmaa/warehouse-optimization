@@ -1,0 +1,101 @@
+[
+    {
+        "sku": "BDW-001-CAN",
+        "product_name": "Budweiser Lager",
+        "frequency": 85000,
+        "category": "Beer",
+        "dimensions_cm": { "length": 15, "width": 10, "height": 18 },
+        "weight_kg": 0.35,
+        "unit_cost": 0.85
+    },
+    {
+        "sku": "BUDLT-001-BOT",
+        "product_name": "Bud Light",
+        "frequency": 62000,
+        "category": "Beer",
+        "dimensions_cm": { "length": 15, "width": 10, "height": 18 },
+        "weight_kg": 0.35,
+        "unit_cost": 0.78
+    },
+    {
+        "sku": "STL-002-BOT",
+        "product_name": "Stella Artois",
+        "frequency": 31000,
+        "category": "Beer",
+        "dimensions_cm": { "length": 15, "width": 10, "height": 18 },
+        "weight_kg": 0.35,
+        "unit_cost": 1.15
+    },
+    {
+        "sku": "COR-001-LG",
+        "product_name": "Corona Extra",
+        "frequency": 45000,
+        "category": "Beer",
+        "dimensions_cm": { "length": 15, "width": 10, "height": 18 },
+        "weight_kg": 0.35,
+        "unit_cost": 1.05
+    },
+    {
+        "sku": "MIC-ULTRA-CAN",
+        "product_name": "Michelob Ultra",
+        "frequency": 78000,
+        "category": "Beer",
+        "dimensions_cm": { "length": 15, "width": 10, "height": 18 },
+        "weight_kg": 0.35,
+        "unit_cost": 0.92
+    },
+    {
+        "sku": "EST-003-CAN",
+        "product_name": "Estrella Damm",
+        "frequency": 12000,
+        "category": "Beer",
+        "dimensions_cm": { "length": 15, "width": 10, "height": 18 },
+        "weight_kg": 0.35,
+        "unit_cost": 1.25
+    },
+    {
+        "sku": "CUT-WTRMELON-CAN",
+        "product_name": "Cutwater Watermelon Seltzer",
+        "frequency": 22000,
+        "category": "Seltzer",
+        "dimensions_cm": { "length": 15, "width": 10, "height": 18 },
+        "weight_kg": 0.35,
+        "unit_cost": 1.50
+    },
+    {
+        "sku": "BUD-LT-MERCH",
+        "product_name": "Bud Light Logo T-Shirt",
+        "frequency": 500,
+        "category": "Merchandise",
+        "dimensions_cm": { "length": 20, "width": 15, "height": 5 },
+        "weight_kg": 0.2,
+        "unit_cost": 7.00
+    },
+    {
+        "sku": "MIC-ULTRA-HAT",
+        "product_name": "Michelob Ultra Branded Cap",
+        "frequency": 300,
+        "category": "Merchandise",
+        "dimensions_cm": { "length": 25, "width": 20, "height": 12 },
+        "weight_kg": 0.15,
+        "unit_cost": 5.50
+    },
+    {
+        "sku": "COR-MERCH-GLASS",
+        "product_name": "Corona Branded Glassware",
+        "frequency": 1500,
+        "category": "Merchandise",
+        "dimensions_cm": { "length": 10, "width": 10, "height": 20 },
+        "weight_kg": 0.5,
+        "unit_cost": 3.25
+    },
+    {
+        "sku": "NON-ALC-001",
+        "product_name": "Budweiser Zero",
+        "frequency": 1800,
+        "category": "Non-Alcoholic",
+        "dimensions_cm": { "length": 15, "width": 10, "height": 18 },
+        "weight_kg": 0.35,
+        "unit_cost": 0.80
+    }
+]

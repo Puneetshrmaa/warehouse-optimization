@@ -1,0 +1,208 @@
+<!-- Chosen Palette: Cool Neutrals & Dark Mode -->
+<!-- Application Structure Plan: A single-page dashboard with a clean, responsive layout. The core user flow is to load the page and view a detailed report, which is broken into key sections for easy consumption. This structure was chosen to prioritize quick access to critical business metrics, such as cost savings and efficiency gains, without any visual distractions. The user can simply scroll to review the analysis and recommendations. -->
+<!-- Visualization & Content Choices: 
+  1. Key Metrics (Metrics from report -> Goal: Inform -> Presentation: Dynamic text in a card layout -> Interaction: None -> Justification: Provides an immediate, high-impact summary of the analysis results in a clear, digestible format.
+  2. Detailed Report (Analysis findings and recommendations from report -> Goal: Explain/Summarize -> Presentation: Structured text blocks -> Interaction: None -> Justification: Translates the raw data into a narrative that explains the business value of the project.
+-->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse Optimization Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        :root {
+            --bg-color: #f0f4f8;
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --heading-color: #1a202c;
+            --sub-heading-color: #4b5563;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f97316;
+        }
+        .dark-mode {
+            --bg-color: #111827;
+            --text-color: #e5e7eb;
+            --card-bg: #1f2937;
+            --border-color: #374151;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --heading-color: #f3f4f6;
+            --sub-heading-color: #9ca3af;
+            --accent-green: #34d399;
+            --accent-blue: #60a5fa;
+            --accent-purple: #a78bfa;
+            --accent-orange: #fb923c;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .info-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, border-color 0.3s;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px var(--shadow-color);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-4xl font-bold text-center text-gray-900 leading-tight">Warehouse Optimization Dashboard</h1>
+        </div>
+        <p class="text-center text-gray-500 mb-8">Data-Driven Supply Chain Efficiency</p>
+
+        <!-- Main Metrics Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="info-card flex flex-col items-center text-center">
+                <span class="text-3xl font-extrabold text-green-500" id="efficiencyImprovement">N/A</span>
+                <span class="text-sm text-gray-500 mt-2">Efficiency Improvement</span>
+            </div>
+            <div class="info-card flex flex-col items-center text-center">
+                <span class="text-3xl font-extrabold text-blue-500" id="distanceSaved">N/A</span>
+                <span class="text-sm text-gray-500 mt-2">Distance Saved (Meters)</span>
+            </div>
+            <div class="info-card flex flex-col items-center text-center">
+                <span class="text-3xl font-extrabold text-purple-500" id="timeSaved">N/A</span>
+                <span class="text-sm text-gray-500 mt-2">Annual Time Saved (Hours)</span>
+            </div>
+            <div class="info-card flex flex-col items-center text-center">
+                <span class="text-3xl font-extrabold text-orange-500" id="costSaved">N/A</span>
+                <span class="text-sm text-gray-500 mt-2">Annual Cost Savings</span>
+            </div>
+        </div>
+        
+        <!-- Detailed Report Section -->
+        <div class="info-card">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Detailed Analysis Report</h2>
+            <div id="reportContent" class="space-y-6 text-gray-700">
+                <div class="border-b pb-4">
+                    <h3 class="font-bold text-lg mb-2">Key Metrics Breakdown</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Original Annual Pick Distance: <span class="font-semibold text-gray-900" id="originalDistance">N/A</span></li>
+                        <li>Optimized Annual Pick Distance: <span class="font-semibold text-gray-900" id="optimizedDistance">N/A</span></li>
+                        <li>Original Annual Picking Cost: <span class="font-semibold text-gray-900" id="originalCost">N/A</span></li>
+                        <li>Optimized Annual Picking Cost: <span class="font-semibold text-gray-900" id="optimizedCost">N/A</span></li>
+                        <li>Estimated Annual Picking Cost Saved: <span class="font-semibold text-gray-900" id="costSavedDetail">N/A</span></li>
+                    </ul>
+                </div>
+                
+                <div class="border-b pb-4">
+                    <h3 class="font-bold text-lg mb-2">Inventory and Financial Metrics</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Estimated Annual Inventory Holding Cost: <span class="font-semibold text-gray-900" id="holdingCost">N/A</span></li>
+                        <li>Estimated Annual Inventory Reorder Cost: <span class="font-semibold text-gray-900" id="reorderCost">N/A</span></li>
+                        <li>Total Estimated Inventory Cost: <span class="font-semibold text-gray-900" id="totalInventoryCost">N/A</span></li>
+                    </ul>
+                </div>
+
+                <div class="border-b pb-4">
+                    <h3 class="font-bold text-lg mb-2">ABC Analysis Findings</h3>
+                    <p>Products are categorized based on their contribution to total order frequency, following Pareto's 80/20 principle.</p>
+                    <div class="mt-4 space-y-2">
+                        <div id="categoryA" class="bg-gray-50 p-3 rounded-md">
+                            <h4 class="font-semibold">Category A (High-Frequency)</h4>
+                            <p id="categoryADetails">Loading...</p>
+                        </div>
+                        <div id="categoryB" class="bg-gray-50 p-3 rounded-md">
+                            <h4 class="font-semibold">Category B (Medium-Frequency)</h4>
+                            <p id="categoryBDetails">Loading...</p>
+                        </div>
+                        <div id="categoryC" class="bg-gray-50 p-3 rounded-md">
+                            <h4 class="font-semibold">Category C (Low-Frequency)</h4>
+                            <p id="categoryCDetails">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pb-4">
+                    <h3 class="font-bold text-lg mb-2">Strategic Recommendations</h3>
+                    <ul class="list-decimal list-inside space-y-2">
+                        <li>Loading...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('warehouse_analysis_results.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                const metrics = data.metrics;
+                document.getElementById('efficiencyImprovement').textContent = metrics.efficiency_improvement.toFixed(2) + '%';
+                document.getElementById('distanceSaved').textContent = metrics.distance_saved.toLocaleString();
+                document.getElementById('timeSaved').textContent = metrics.time_saved_hours.toFixed(2);
+                document.getElementById('costSaved').textContent = `$${metrics.cost_saved.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+                document.getElementById('originalDistance').textContent = metrics.original_distance.toLocaleString() + ' meters';
+                document.getElementById('optimizedDistance').textContent = metrics.optimized_distance.toLocaleString() + ' meters';
+                document.getElementById('originalCost').textContent = `$${metrics.original_cost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                document.getElementById('optimizedCost').textContent = `$${metrics.optimized_cost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                document.getElementById('costSavedDetail').textContent = `$${metrics.cost_saved.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                
+                document.getElementById('holdingCost').textContent = `$${metrics.holding_cost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                document.getElementById('reorderCost').textContent = `$${metrics.reorder_cost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                document.getElementById('totalInventoryCost').textContent = `$${metrics.total_inventory_cost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+                const renderCategoryDetails = (category, detailsId) => {
+                    const products = data.abc_analysis[category];
+                    const totalFreq = products.reduce((sum, p) => sum + p.frequency, 0);
+                    const totalAllFreq = data.layouts.original.reduce((sum, p) => sum + p.frequency, 0);
+                    const share = totalAllFreq > 0 ? (totalFreq / totalAllFreq) * 100 : 0;
+                    const topProducts = products.slice(0, 3).map(p => `${p.product_name} (Freq: ${p.frequency.toLocaleString()})`).join(', ');
+                    document.getElementById(detailsId).innerHTML = `
+                        <strong>Total Products:</strong> ${products.length} <br>
+                        <strong>Frequency Share:</strong> ${share.toFixed(2)}% <br>
+                        <strong>Top Products:</strong> ${topProducts || 'N/A'}
+                    `;
+                };
+
+                renderCategoryDetails('categoryA', 'categoryADetails');
+                renderCategoryDetails('categoryB', 'categoryBDetails');
+                renderCategoryDetails('categoryC', 'categoryCDetails');
+
+                const recommendations = [
+                    `Implement the ABC-based layout immediately to realize a ~${metrics.efficiency_improvement.toFixed(2)}% efficiency gain.`,
+                    `Use this model to perform quarterly reviews and re-adjust product locations as order frequencies change.`,
+                    `Consider automation technologies like 'pick-to-light' systems for Category A zones to further reduce picking errors and time.`
+                ];
+                const recList = document.getElementById('strategicRecommendations');
+                recList.innerHTML = recommendations.map(rec => `<li>${rec}</li>`).join('');
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.querySelectorAll('[id]').forEach(el => {
+                    if (el.tagName === 'SPAN' || el.tagName === 'P') {
+                        el.textContent = 'N/A';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
